@@ -1,0 +1,40 @@
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content" style="background-color: #0e0d0d;">
+      <div class="modal-header border-0 d-flex justify-content-between align-items-center" style="background-color: #11181f;">
+        <h1 class="modal-title m-0 text-white fs-5" id="exampleModalLabel">Task Detail</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #taskForm="ngForm" class="row p-5" style="max-width: 600px; background-color: #0e0d0d;">
+          <div class="col-sm-12">
+            <label class="form-label text-white" for="taskname">Task Name</label>
+            <input class="form-control " type="text" name="taskname" readonly ngModel>
+          </div>
+          <div class="col-sm-12">
+            <label class="form-label text-white" for="developername">Developer Name</label>
+            <input class="form-control " type="text" name="developername" readonly ngModel>
+          </div>
+          <div class="col-sm-6">
+            <label class="form-label text-white" for="startdate"> Start Date</label>
+            <input class="form-control " type="date" name="startdate" readonly ngModel>
+          </div>
+          <div class="col-sm-6">
+            <label class="form-label text-white" for="enddate"> End Date</label>
+            <input class="form-control " type="date" name="enddate" readonly ngModel>
+          </div>
+          <div class="col-sm-6">
+            <label class="form-label text-white" for="taskstatus">Task Status</label>
+            <select class="form-select" name="taskstatus" ngModel disabled >
+              <option value="To Do">To Do</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Under Review">Under Review</option>
+              <option value="Ready">Ready</option>
+            </select>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+

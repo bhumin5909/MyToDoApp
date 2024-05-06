@@ -1,0 +1,47 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="background-color: #0e0d0d;">
+      <div class="modal-header border-0 d-flex justify-content-between align-items-center" style="background-color: #11181f;">
+        <h1 class="modal-title m-0 fs-5 text-white" id="exampleModalLabel">{{editTask? 'Update Task':'Create New Task'}}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeForm()"></button>
+      </div>
+      <div class="modal-body">
+        <form #taskForm="ngForm" (ngSubmit)="addNewTask(taskForm)" class="row p-2" style="max-width: 600px;">
+          <div class="col-sm-12">
+            <label class="form-label text-white-50 py-1" for="taskname">Task Name</label>
+            <input class="form-control " type="text" name="taskname" required ngModel>
+          </div>
+          <div class="col-sm-12">
+            <label class="form-label text-white-50 py-1" for="taskname">Comments</label>
+            <textarea class="form-control " type="text" name="comments" required ngModel cols="30" rows="3"></textarea>
+          </div>
+          <div class="col-sm-12">
+            <label class="form-label text-white-50 py-1" for="developername">Developer Name</label>
+            <input class="form-control " type="text" name="developername" required ngModel>
+          </div>
+          <div class="col-sm-6">
+            <label class="form-label text-white-50 py-1" for="startdate"> Start Date</label>
+            <input class="form-control " type="date" name="startdate" required ngModel>
+          </div>
+          <div class="col-sm-6">
+            <label class="form-label text-white-50 py-1" for="enddate"> End Date</label>
+            <input class="form-control " type="date" name="enddate" required ngModel>
+          </div>
+          <div class="col-sm-5">
+            <label class="form-label text-white-50 py-1" for="taskstatus">Task Status</label>
+            <select class="form-select" name="taskstatus" [(ngModel)]="taskStatus" required>
+              <option value="To Do" selected>To Do</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Under Review">Under Review</option>
+              <option value="Ready">Ready</option>
+            </select>
+          </div>
+          <div class="pt-3 d-flex justify-content-center ">
+            <button type="submit" class="btn btn-primary " data-bs-dismiss="modal" [disabled]="taskForm.invalid">{{editTask?'Update Task': 'Add Task'}}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,36 @@
+
+<div class="toast position-absolute z-3 start-50 translate-middle" id="myToast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false" #myToast>
+  <div class="toast-header">
+    <strong class="mr-auto">{{positiveResponse? 'Success': 'Error'}}</strong>
+    <button type="button" class="btn-close me-2 m-auto" (click)="closeToast()" aria-label="Close"></button>
+  </div>
+  <div class="toast-body">
+    {{positiveResponse? positiveResponse: negativeResponse}}
+  </div>
+</div>
+
+<div class="d-flex justify-content-center align-items-center container-height">
+  <div *ngIf="isLoading" class="spinner-border"></div>
+  <form *ngIf="!isLoading" (ngSubmit)="submitLogin()" [formGroup]="myForm" class="loginBlock text-white">
+    <h1 class="text-white text-center">Login</h1>
+    <div>
+      <label for="" class="form-label text-white-50">User Name</label>
+      <input type="text" formControlName="uemail" class="form-control">
+      <div *ngIf="myForm.controls['uemail'].invalid && myForm.controls['uemail'].touched && myForm.controls['uemail'].dirty ">
+        <small class="text-danger">invalid email</small>
+      </div>
+    </div>
+    <div>
+      <label for="" class="form-label text-white-50">Password</label>
+      <input type="password" formControlName="pswd" class="form-control">
+      <div *ngIf="myForm.controls['pswd'].invalid && myForm.controls['pswd'].touched && myForm.controls['pswd'].dirty ">
+        <small class="text-danger">invalid password</small>
+      </div>
+    </div>
+
+    <div class="p-3">
+      <button type="submit" [disabled]="myForm.invalid" class="btn btn-primary">Login</button>
+    </div>
+    Don't have an account ? <a [routerLink]="'/signUp'">Register Here</a>
+  </form>
+</div>

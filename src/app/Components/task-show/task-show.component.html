@@ -1,0 +1,152 @@
+<!-- <div *ngIf="Alltasks.length<1 && errorMessage == null" class="d-flex vh-100 justify-content-center align-items-center">
+  <div class="spinner-border text-primary">
+  </div>
+</div>-->
+<div *ngIf="errorMessage!=null" class="d-flex vh-100 justify-content-center align-items-center">
+  <div class="alert alert-danger">
+    <h1>{{errorMessage}}</h1>
+  </div>
+</div>
+
+<div class="container-fluid bg-black min-vh-100">
+  <nav class="navbar navbar-expand-lg border-1 border-bottom border-dark" style="height: 50px;">
+    <div class="container-fluid d-flex justify-content-between">
+      <div class="input-group d-flex bg-black rounded-5" style="width:auto;">
+        <span class="input-group-text bg-black border-0 rounded-5"><i class="bi bi-search text-white"></i></span>
+        <input type="text" class="bg-black border-0 text-white searchInput" placeholder="Search Task...">
+      </div>
+      <div class="d-flex gap-3 align-items-center">
+        <li class="dropdown">
+        <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="bi bi-filter"></i> Sort By
+        </button>
+        <ul class="dropdown-menu dropdown-menu-dark">
+          <li><a class="dropdown-item" href="#">Action</a></li>
+          <li><a class="dropdown-item" href="#">Another action</a></li>
+          <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="bi bi-funnel-fill"></i> Filter
+        </button>
+        <ul class="dropdown-menu dropdown-menu-dark">
+          <li><a class="dropdown-item" href="#">Action</a></li>
+          <li><a class="dropdown-item" href="#">Another action</a></li>
+          <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
+      </li>
+      </div>
+    </div>
+  </nav>
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 p-sm-2" cdkDropListGroup>
+    <div class="col p-3" cdkDropList [cdkDropListData]="todo" (cdkDropListDropped)="drop($event)">
+      <h1 class="d-flex justify-content-between align-items-center"> To Do <div class="taskColor" style="background-color: blue;"></div></h1>
+      <div class=" mb-3" *ngFor="let task of todo" cdkDrag>
+        <div class="border-0 rounded shadow-lg p-3 bg-dark" [ngClass]="'task-'+task.taskstatus">
+          <div class="p-2 border border-black border-1 rounded mb-2 text-white-50" style="height: 200px;">
+            <h5 class="text-white">
+              Task: {{task.taskname}}
+            </h5>
+            <h5>
+              Comments: {{task.comments}}
+            </h5>
+            <h5>
+              Assigned To: {{ task.developername}}
+            </h5>
+            <!-- <h5>Status: {{task.taskstatus}}</h5> -->
+            <h4 class="text-white"><i  class="bi bi-calendar3"></i> {{task.enddate | date}}</h4>
+          </div>
+          <div class="d-flex justify-content-around p-3 border border-1 border-black rounded gap-2">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2"
+              (click)="showTaskDetail(task)"><i class="bi bi-postcard"></i></button>
+            <button type="button" class="btn btn-warning" (click)="editTask(task)" data-bs-toggle="modal"
+              data-bs-target="#exampleModal"><i class="bi bi-pencil-square"></i></button>
+            <button type="button" class="btn btn-danger" (click)="deleteTask(task.id)"><i class="bi bi-trash"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col p-3" cdkDropList [cdkDropListData]="inprogress" (cdkDropListDropped)="drop($event)">
+      <h1 class="d-flex justify-content-between align-items-center">In Progress <div class="taskColor" style="background-color: red;"></div></h1>
+      <div class=" mb-3" *ngFor="let task of inprogress" cdkDrag>
+        <div class="border-0 rounded shadow-lg p-3 bg-dark" [ngClass]="'task-'+task.taskstatus">
+          <div class="p-2 border border-black border-1 rounded mb-2 text-white-50" style="height: 200px;">
+            <h5 class="text-white">
+              Task: {{task.taskname}}
+            </h5>
+            <h5>
+              Comments: {{task.comments}}
+            </h5>
+            <h5>
+              Assigned To: {{ task.developername}}
+            </h5>
+            <!-- <h5>Status: {{task.taskstatus}}</h5> -->
+            <h4 class="text-white"><i  class="bi bi-calendar3"></i> {{task.enddate | date}}</h4>
+          </div>
+          <div class="d-flex justify-content-around p-3 border border-1 border-black rounded gap-2">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2"
+              (click)="showTaskDetail(task)"><i class="bi bi-postcard"></i></button>
+            <button type="button" class="btn btn-warning" (click)="editTask(task)" data-bs-toggle="modal"
+              data-bs-target="#exampleModal"><i class="bi bi-pencil-square"></i></button>
+            <button type="button" class="btn btn-danger" (click)="deleteTask(task.id)"><i class="bi bi-trash"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col p-3"  cdkDropList [cdkDropListData]="underReview" (cdkDropListDropped)="drop($event)">
+      <h1 class="d-flex justify-content-between align-items-center">Under Review <div class="taskColor" style="background-color: purple;"></div></h1>
+      <div class=" mb-3" *ngFor="let task of underReview" cdkDrag>
+        <div class="border-0 rounded shadow-lg p-3 bg-dark" [ngClass]="'task-'+task.taskstatus">
+          <div class="p-2 border border-black border-1 rounded mb-2 text-white-50" style="height: 200px;">
+            <h5 class="text-white">
+              Task: {{task.taskname}}
+            </h5>
+            <h5>
+              Comments: {{task.comments}}
+            </h5>
+            <h5>
+              Assigned To: {{ task.developername}}
+            </h5>
+            <!-- <h5>Status: {{task.taskstatus}}</h5> -->
+            <h4 class="text-white"><i  class="bi bi-calendar3"></i> {{task.enddate | date}}</h4>
+          </div>
+          <div class="d-flex justify-content-around p-3 border border-1 border-black rounded gap-2">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2"
+              (click)="showTaskDetail(task)"><i class="bi bi-postcard"></i></button>
+            <button type="button" class="btn btn-warning" (click)="editTask(task)" data-bs-toggle="modal"
+              data-bs-target="#exampleModal"><i class="bi bi-pencil-square"></i></button>
+            <button type="button" class="btn btn-danger" (click)="deleteTask(task.id)"><i class="bi bi-trash"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col p-3" cdkDropList [cdkDropListData]="ready" (cdkDropListDropped)="drop($event)">
+      <h1 class="d-flex justify-content-between align-items-center">Ready <div class="taskColor" style="background-color: green;"></div></h1>
+      <div class=" mb-3" *ngFor="let task of ready" cdkDrag>
+        <div class="border-0 rounded shadow-lg p-3 bg-dark" [ngClass]="'task-'+task.taskstatus">
+          <div class="p-2 border border-black border-1 rounded mb-2 text-white-50" style="height: 200px;">
+            <h5 class="text-white">
+              Task: {{task.taskname}}
+            </h5>
+            <h5>
+              Comments: {{task.comments}}
+            </h5>
+            <h5>
+              Assigned To: {{ task.developername}}
+            </h5>
+            <!-- <h5>Status: {{task.taskstatus}}</h5> -->
+            <h4 class="text-white"><i  class="bi bi-calendar3"></i> {{task.enddate | date}}</h4>
+          </div>
+          <div class="d-flex justify-content-around p-3 border border-1 border-black rounded gap-2">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2"
+              (click)="showTaskDetail(task)"><i class="bi bi-postcard"></i></button>
+            <button type="button" class="btn btn-warning" (click)="editTask(task)" data-bs-toggle="modal"
+              data-bs-target="#exampleModal"><i class="bi bi-pencil-square"></i></button>
+            <button type="button" class="btn btn-danger" (click)="deleteTask(task.id)"><i class="bi bi-trash"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

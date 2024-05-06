@@ -1,0 +1,10 @@
+.mainDiv{
+  background-image: url("src/assets/pikaso_texttoimage_dark-black-home-page-background-image-for-to-do-ap.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#main_head{
+  font-size: 70px;
+  line-height: normal !important;
+}

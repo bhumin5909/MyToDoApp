@@ -1,0 +1,49 @@
+<div class="d-flex bg-dark">
+  <div class="d-flex flex-column flex-shrink-0 p-2 vh-100" style="border-right:2px solid #46596b;"  (mouseover)="show_sideNav = false" (mouseout)="show_sideNav = true">
+    <a [routerLink]="''" class="d-block mx-auto text-decoration-none">
+      <img src="assets/wolf-logo.png" alt="logo" height="70px" width="70px">
+    </a>
+    <hr class="text-white">
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+        <a class="nav-link p-1 text-white d-flex align-items-center gap-2 my-1 overflow-hidden" aria-current="page"
+          [routerLinkActiveOptions]="{exact:true}" [routerLinkActive]="'active'" [routerLink]="'Home'">
+          <i class="bi bi-house-heart h1 ms-3"></i> <a [ngClass]="show_sideNav?'hideSidebar':'showSidebar'">Home</a>
+        </a>
+      </li>
+      <li *ngIf="isLoggedIn">
+        <a class="nav-link p-1 text-white d-flex align-items-center gap-2 my-1 overflow-hidden" [routerLinkActive]="'active'"
+          [routerLink]="'Dashboard'" [routerLinkActiveOptions]="{exact:true}">
+          <i class="bi bi-speedometer2 h1 ms-3"></i> <a [ngClass]="show_sideNav?'hideSidebar':'showSidebar'">Dashboard</a>
+        </a>
+      </li>
+      <li>
+        <a class="nav-link p-1 text-white d-flex align-items-center gap-2 my-1 overflow-hidden" data-bs-toggle="modal"
+          data-bs-target="#exampleModal">
+          <i class="bi bi-plus-square h1 ms-3"></i> <a [ngClass]="show_sideNav?'hideSidebar':'showSidebar'">Add Task</a>
+        </a>
+      </li>
+    </ul>
+    <hr>
+    <div class="dropdown">
+      <a class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2"
+        data-bs-toggle="dropdown" aria-expanded="false">
+        <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+      </a>
+      <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+        <li><a class="dropdown-item" href="#">New project...</a></li>
+        <li><a class="dropdown-item" href="#">Settings</a></li>
+        <li><a class="dropdown-item" href="#">Profile</a></li>
+        <li><a class="dropdown-item" [routerLinkActive]="'active'" [routerLink]="'Login'" *ngIf="!isLoggedIn">Login</a>
+        </li>
+        <li>
+          <hr class="dropdown-divider">
+        </li>
+        <li><a class="dropdown-item" (click)="logOut()" *ngIf="isLoggedIn">Sign out</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="main_area w-100 overflow-scroll vh-100">
+    <router-outlet></router-outlet>
+  </div>
+</div>
