@@ -35,9 +35,9 @@ const routes: Routes = [
     component: SignUpComponent
   },
   {
-    path:'**',      // wild card route
+    path:'**',
     title:'Page Not Found',
-    component: NotFoundComponent
+    redirectTo:''
   }
 ];
 
