@@ -23,15 +23,17 @@ export class SignUpComponent {
   positiveResponse!: string;
   negativeResponse!: string;
 
-  constructor(private router: Router){
+  constructor(private router: Router){}
 
-  }
   ngOnInit() {
     this.myForm = this.fb.group({
+      fname:['', Validators.required],
+      lname:['',Validators.required],
       uemail: ['', [Validators.required,Validators.email]],
       pswd: ['', Validators.required]
     });
   }
+
   ngAfterViewInit() {
     this.myToastElement = this.bsToast.nativeElement;
     this.bsToaster = new bootstrap.Toast(this.myToastElement);
