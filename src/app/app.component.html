@@ -6,21 +6,21 @@
     <hr class="text-white">
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
-        <a class="nav-link p-1 text-white d-flex align-items-center gap-2 my-1 overflow-hidden" aria-current="page"
+        <a class="nav-link p-2 text-white d-flex align-items-center gap-2 m-0 overflow-hidden" aria-current="page"
           [routerLinkActiveOptions]="{exact:true}" [routerLinkActive]="'active'" [routerLink]="'Home'">
-          <i class="bi bi-house-heart h1 ms-3"></i> <a [ngClass]="show_sideNav?'hideSidebar':'showSidebar'">Home</a>
+          <i class="bi bi-house-heart ms-2" style="font-size: 50px;"></i> <a [ngClass]="show_sideNav?'hideSidebar':'showSidebar'">Home</a>
         </a>
       </li>
       <li *ngIf="isLoggedIn">
-        <a class="nav-link p-1 text-white d-flex align-items-center gap-2 my-1 overflow-hidden" [routerLinkActive]="'active'"
+        <a class="nav-link p-2 text-white d-flex align-items-center gap-2 m-0 overflow-hidden" [routerLinkActive]="'active'"
           [routerLink]="'Dashboard'" [routerLinkActiveOptions]="{exact:true}">
-          <i class="bi bi-speedometer2 h1 ms-3"></i> <a [ngClass]="show_sideNav?'hideSidebar':'showSidebar'">Dashboard</a>
+          <i class="bi bi-speedometer2 ms-2" style="font-size: 50px;"></i> <a [ngClass]="show_sideNav?'hideSidebar':'showSidebar'">Dashboard</a>
         </a>
       </li>
-      <li>
-        <a class="nav-link p-1 text-white d-flex align-items-center gap-2 my-1 overflow-hidden" data-bs-toggle="modal"
+      <li *ngIf="isLoggedIn">
+        <a class="nav-link p-2 text-white d-flex align-items-center gap-2 m-0 overflow-hidden" data-bs-toggle="modal"
           data-bs-target="#exampleModal">
-          <i class="bi bi-plus-square h1 ms-3"></i> <a [ngClass]="show_sideNav?'hideSidebar':'showSidebar'">Add Task</a>
+          <i class="bi bi-plus-square ms-2" style="font-size: 50px;"></i> <a [ngClass]="show_sideNav?'hideSidebar':'showSidebar'">Add Task</a>
         </a>
       </li>
     </ul>
